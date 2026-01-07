@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Firebase Test</title>
+  <style>
+    body {
+      background: url('image3.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      color: #000;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+<button onclick="testWrite()">TEST FIREBASE WRITE</button>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "PASTE_REAL_KEY",
+    authDomain: "PASTE_REAL_DOMAIN",
+    projectId: "PASTE_REAL_PROJECT_ID",
+    storageBucket: "PASTE_REAL_BUCKET",
+    messagingSenderId: "PASTE_REAL_ID",
+    appId: "PASTE_REAL_APP_ID"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  function testWrite() {
+    db.collection("connectionTest").add({
+      message: "Frontend is connected",
+      time: firebase.firestore.FieldValue.serverTimestamp()
+    })
+    .then(() => alert("✅ BACKEND CONNECTED"))
+    .catch(err => alert("❌ ERROR: " + err.message));
+  }
+</script>
+
+</body>
+</html>

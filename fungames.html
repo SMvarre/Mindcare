@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindCare | Fun Games</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      background: url('image2.jpeg') no-repeat center center fixed;
+      background-size: cover;
+    }
+    .games-container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 2rem;
+      text-align: center;
+    }
+    .games-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .game-card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border: 1px solid #E2E8F0;
+      transition: transform 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .game-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    .game-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+    .game-card h3 {
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    .game-card p {
+      margin-bottom: 1.5rem;
+      opacity: 0.8;
+    }
+    .game-card button {
+      background: var(--primary);
+      color: var(--text);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin: 0.25rem;
+    }
+    .game-card button:hover {
+      background: var(--accent);
+      color: var(--white);
+    }
+    #bubble-area, #color-area, #memory-area {
+      height: 250px;
+      border-radius: 10px;
+      margin-top: 1rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text);
+      opacity: 0.8;
+    }
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      width: 100%;
+      height: 100%;
+    }
+    .memory-card {
+      background: var(--primary);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .memory-card.flipped {
+      background: var(--white);
+    }
+    .memory-card:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <h2>MindCare</h2>
+    <a href="dashboard.html">Dashboard</a>
+  </nav>
+  <div class="container">
+    <div class="games-container">
+      <h1>Fun Games</h1>
+      <p>Take a break and enjoy some relaxing games.</p>
+
+      <div class="games-grid">
+        <div class="game-card">
+          <i class="fas fa-brain" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+          <h3>Memory Match</h3>
+          <p>Challenge your mind with this relaxing memory game.</p>
+          <button onclick="startMemoryGame()">Start Game</button>
+          <div id="memory-area">Click start to begin</div>
+        </div>
+
+        <div class="game-card">
+          <i class="fas fa-water" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+          <h3>Breathing Bubbles</h3>
+          <p>Watch calming bubbles float up while practicing deep breathing.</p>
+          <button onclick="startBubbleGame()">Start Breathing</button>
+          <div id="bubble-area">Click start to begin</div>
+        </div>
+
+        <div class="game-card">
+          <i class="fas fa-palette" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+          <h3>Color Meditation</h3>
+          <p>Relax as colors gently transition in soothing patterns.</p>
+          <button onclick="startColorGame()">Start Meditation</button>
+          <div id="color-area">Click start to begin</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function startBubbleGame() {
+      const area = document.getElementById('bubble-area');
+      area.innerHTML = '';
+      for (let i = 0; i < 10; i++) {
+        const bubble = document.createElement('div');
+        bubble.style.position = 'absolute';
+        bubble.style.width = Math.random() * 50 + 20 + 'px';
+        bubble.style.height = bubble.style.width;
+        bubble.style.background = 'rgba(178, 223, 219, 0.7)';
+        bubble.style.borderRadius = '50%';
+        bubble.style.left = Math.random() * 100 + '%';
+        bubble.style.top = '100%';
+        bubble.style.animation = 'floatUp ' + (Math.random() * 3 + 2) + 's linear';
+        area.appendChild(bubble);
+        setTimeout(() => bubble.remove(), 5000);
+      }
+    }
+
+    function startColorGame() {
+      const area = document.getElementById('color-area');
+      const colors = ['#B2DFDB', '#F5F5F5', '#4A5568', '#FFFFFF', '#E8F5E8', '#F3E5F5'];
+      let index = 0;
+      area.innerHTML = '';
+      const interval = setInterval(() => {
+        area.style.background = colors[index % colors.length];
+        area.style.transition = 'background 1s ease';
+        index++;
+        if (index > 20) {
+          clearInterval(interval);
+          area.innerHTML = 'Meditation complete <i class="fas fa-check"></i>';
+          area.style.background = '#B2DFDB';
+        }
+      }, 1000);
+    }
+
+    function startMemoryGame() {
+      const area = document.getElementById('memory-area');
+      area.innerHTML = '';
+      const icons = ['🌸', '🌺', '🌻', '🌼', '🌷', '🌹', '🌻', '🌸', '🌺', '🌼', '🌷', '🌹', '🍀', '🌿', '🌱', '🌳'];
+      const shuffled = icons.sort(() => Math.random() - 0.5);
+      const grid = document.createElement('div');
+      grid.className = 'memory-grid';
+      let flipped = [];
+      let matched = [];
+
+      shuffled.forEach((icon, index) => {
+        const card = document.createElement('div');
+        card.className = 'memory-card';
+        card.dataset.icon = icon;
+        card.dataset.index = index;
+        card.addEventListener('click', () => flipCard(card));
+        grid.appendChild(card);
+      });
+
+      area.appendChild(grid);
+
+      function flipCard(card) {
+        if (flipped.length < 2 && !card.classList.contains('flipped') && !matched.includes(card.dataset.index)) {
+          card.classList.add('flipped');
+          card.innerHTML = card.dataset.icon;
+          flipped.push(card);
+
+          if (flipped.length === 2) {
+            setTimeout(() => {
+              if (flipped[0].dataset.icon === flipped[1].dataset.icon) {
+                matched.push(flipped[0].dataset.index, flipped[1].dataset.index);
+                flipped = [];
+                if (matched.length === icons.length) {
+                  setTimeout(() => alert('Well done! Game complete.'), 500);
+                }
+              } else {
+                flipped.forEach(c => {
+                  c.classList.remove('flipped');
+                  c.innerHTML = '';
+                });
+                flipped = [];
+              }
+            }, 1000);
+          }
+        }
+      }
+    }
+
+    // Add CSS for animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes floatUp {
+        from { transform: translateY(100%); opacity: 1; }
+        to { transform: translateY(-100%); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Apply theme
+    const personality = localStorage.getItem('personality');
+    if (personality) {
+      document.body.classList.add('theme-' + personality.toLowerCase());
+    }
+  </script>
+</body>
+</html>

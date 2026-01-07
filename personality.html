@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindCare | Personality Test</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .test-container {
+      max-width: 600px;
+      margin: auto;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 28px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      text-align: center;
+    }
+    .question {
+      margin-bottom: 2rem;
+    }
+    .question h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .option {
+      padding: 12px;
+      border-radius: 12px;
+      background: #f1f7f6;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .option:hover {
+      background: #e8f5f2;
+    }
+    .option.selected {
+      background: linear-gradient(135deg, #6fcf97, #56cfe1);
+      color: white;
+    }
+    #result {
+      margin-top: 2rem;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <h2>MindCare</h2>
+  </nav>
+  <div class="container">
+    <div class="test-container">
+      <h1>Discover Your Personality</h1>
+      <p class="subtitle">Answer these questions to tailor your experience</p>
+      <div id="questions">
+        <div class="question" id="q1">
+          <h2>How do you feel in social situations?</h2>
+          <div class="options">
+            <div class="option" data-value="introvert">I prefer small groups or being alone</div>
+            <div class="option" data-value="ambivert">I enjoy both, depending on the situation</div>
+            <div class="option" data-value="extrovert">I thrive in large groups and conversations</div>
+          </div>
+        </div>
+        <div class="question" id="q2" style="display:none;">
+          <h2>What helps you relax the most?</h2>
+          <div class="options">
+            <div class="option" data-value="calm">Reading or quiet reflection</div>
+            <div class="option" data-value="active">Physical activity or outdoor time</div>
+            <div class="option" data-value="creative">Creating art or music</div>
+          </div>
+        </div>
+        <div class="question" id="q3" style="display:none;">
+          <h2>How do you handle stress?</h2>
+          <div class="options">
+            <div class="option" data-value="reflective">I journal or talk it out</div>
+            <div class="option" data-value="practical">I make a plan and take action</div>
+            <div class="option" data-value="supportive">I seek support from others</div>
+          </div>
+        </div>
+      </div>
+      <button id="next-btn" style="display:none;">Next</button>
+      <button id="submit-btn" style="display:none;">Get My Personality</button>
+      <div id="result">
+        <h2>Your Personality: <span id="personality-type"></span></h2>
+        <p id="description"></p>
+        <button onclick="location.href='dashboard.html'">Continue to Dashboard</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    let currentQuestion = 1;
+    let answers = {};
+    const questions = ['q1', 'q2', 'q3'];
+
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('option')) {
+        const question = e.target.closest('.question');
+        const options = question.querySelectorAll('.option');
+        options.forEach(opt => opt.classList.remove('selected'));
+        e.target.classList.add('selected');
+        answers[question.id] = e.target.dataset.value;
+        document.getElementById('next-btn').style.display = 'block';
+      }
+    });
+
+    document.getElementById('next-btn').addEventListener('click', function() {
+      document.getElementById('q' + currentQuestion).style.display = 'none';
+      currentQuestion++;
+      if (currentQuestion <= 3) {
+        document.body.style.backgroundImage = 'url("image2.jpeg")';
+        document.getElementById('q' + currentQuestion).style.display = 'block';
+        this.style.display = 'none';
+      } else {
+        this.style.display = 'none';
+        document.getElementById('submit-btn').style.display = 'block';
+      }
+    });
+
+    document.getElementById('submit-btn').addEventListener('click', function() {
+      const personality = determinePersonality(answers);
+      localStorage.setItem('personality', personality);
+      applyTheme(personality);
+      document.getElementById('questions').style.display = 'none';
+      this.style.display = 'none';
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('personality-type').textContent = personality;
+      document.getElementById('description').textContent = getDescription(personality);
+    });
+
+    function determinePersonality(answers) {
+      const scores = { calm: 0, energetic: 0, reflective: 0 };
+      if (answers.q1 === 'introvert') scores.calm++;
+      if (answers.q1 === 'extrovert') scores.energetic++;
+      if (answers.q2 === 'calm') scores.calm++;
+      if (answers.q2 === 'active') scores.energetic++;
+      if (answers.q3 === 'reflective') scores.reflective++;
+      if (answers.q3 === 'practical') scores.energetic++;
+      if (answers.q3 === 'supportive') scores.calm++;
+      const max = Math.max(...Object.values(scores));
+      for (let type in scores) {
+        if (scores[type] === max) return type.charAt(0).toUpperCase() + type.slice(1);
+      }
+      return 'Balanced';
+    }
+
+    function getDescription(type) {
+      const descriptions = {
+        Calm: 'You find peace in quiet moments and self-reflection. Your theme is soothing blues and greens.',
+        Energetic: 'You draw energy from activity and interaction. Your theme is vibrant purples and yellows.',
+        Reflective: 'You value deep thought and expression. Your theme is warm oranges and pinks.',
+        Balanced: 'You adapt well to different situations. Your theme is harmonious gradients.'
+      };
+      return descriptions[type] || 'A unique blend of traits.';
+    }
+
+    function applyTheme(personality) {
+      const themes = {
+        Calm: 'theme-calm',
+        Energetic: 'theme-energetic',
+        Reflective: 'theme-reflective',
+        Balanced: 'theme-balanced'
+      };
+      document.body.classList.add(themes[personality] || 'theme-balanced');
+    }
+
+    // Set initial background for 1st question
+    document.body.style.backgroundImage = 'url("image1.jpeg")';
+  </script>
+</body>
+</html>

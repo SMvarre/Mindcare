@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Self-Care 🌿</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      background: url('image2.jpeg') no-repeat center center fixed;
+      background-size: cover;
+    }
+    .selfcare-container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 2rem;
+      text-align: center;
+    }
+    .selfcare-header {
+      margin-bottom: 2rem;
+    }
+    .selfcare-header i {
+      font-size: 4rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    .selfcare-quote {
+      font-style: italic;
+      opacity: 0.8;
+      margin-bottom: 2rem;
+    }
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .category {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border: 1px solid #E2E8F0;
+      transition: transform 0.3s;
+    }
+    .category:hover {
+      transform: translateY(-5px);
+    }
+    .category i {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    .category h4 {
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+    .checklist input[type="checkbox"] {
+      margin-right: 10px;
+      accent-color: var(--primary);
+    }
+    .progress-section {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin-top: 2rem;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 20px;
+      background: var(--secondary);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 1rem 0;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      width: 0%;
+      transition: width 0.5s;
+    }
+    .tips-section {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin-top: 2rem;
+      text-align: left;
+    }
+    .tip {
+      background: var(--secondary);
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--primary);
+    }
+    .tip i {
+      color: var(--primary);
+      margin-right: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <h2>MindCare</h2>
+    <a href="dashboard.html">Dashboard</a>
+  </nav>
+  <div class="container">
+    <div class="selfcare-container">
+      <div class="selfcare-header">
+        <i class="fas fa-spa"></i>
+        <h1>Your Self-Care Journey</h1>
+        <p class="selfcare-quote">"Self-care is not a luxury, it's a necessity for a healthy mind and body."</p>
+      </div>
+
+      <div class="categories">
+        <div class="category">
+          <i class="fas fa-tint"></i>
+          <h4>Physical Wellness</h4>
+          <ul class="checklist">
+            <li><input type="checkbox" id="water"> Drink at least 8 glasses of water</li>
+            <li><input type="checkbox" id="stretch"> Stretch for 5-10 minutes</li>
+            <li><input type="checkbox" id="walk"> Take a short walk outside</li>
+            <li><input type="checkbox" id="meal"> Eat a balanced, nutritious meal</li>
+            <li><input type="checkbox" id="sleep"> Get 7-9 hours of quality sleep</li>
+          </ul>
+        </div>
+
+        <div class="category">
+          <i class="fas fa-brain"></i>
+          <h4>Mental Wellness</h4>
+          <ul class="checklist">
+            <li><input type="checkbox" id="meditate"> Practice 5-minute meditation</li>
+            <li><input type="checkbox" id="journal"> Write in a gratitude journal</li>
+            <li><input type="checkbox" id="breathe"> Try deep breathing exercises</li>
+            <li><input type="checkbox" id="social"> Connect with a loved one</li>
+            <li><input type="checkbox" id="limit"> Limit screen time before bed</li>
+          </ul>
+        </div>
+
+        <div class="category">
+          <i class="fas fa-heart"></i>
+          <h4>Emotional Wellness</h4>
+          <ul class="checklist">
+            <li><input type="checkbox" id="positive"> Focus on positive affirmations</li>
+            <li><input type="checkbox" id="hobby"> Engage in a favorite hobby</li>
+            <li><input type="checkbox" id="forgive"> Practice self-forgiveness</li>
+            <li><input type="checkbox" id="express"> Express emotions creatively</li>
+            <li><input type="checkbox" id="boundaries"> Set healthy boundaries</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="progress-section">
+        <h3><i class="fas fa-chart-line"></i> Your Self-Care Progress</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <p id="progress-text">Complete tasks to see your progress!</p>
+      </div>
+
+      <div class="tips-section">
+        <h3><i class="fas fa-lightbulb"></i> Daily Self-Care Tips</h3>
+        <div class="tip">
+          <i class="fas fa-sun"></i>
+          <strong>Morning Ritual:</strong> Start your day with 5 minutes of stretching and deep breathing to set a positive tone.
+        </div>
+        <div class="tip">
+          <i class="fas fa-moon"></i>
+          <strong>Evening Wind-down:</strong> Create a calming bedtime routine, like reading or gentle yoga, to improve sleep quality.
+        </div>
+        <div class="tip">
+          <i class="fas fa-utensils"></i>
+          <strong>Mindful Eating:</strong> Pay attention to your meals, eating slowly and savoring each bite for better digestion and satisfaction.
+        </div>
+        <div class="tip">
+          <i class="fas fa-users"></i>
+          <strong>Social Connection:</strong> Reach out to a friend or family member daily, even if it's just a quick call or message.
+        </div>
+        <div class="tip">
+          <i class="fas fa-leaf"></i>
+          <strong>Nature Time:</strong> Spend at least 10 minutes outdoors each day to reduce stress and boost mood.
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function updateProgress() {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      const checked = document.querySelectorAll('input[type="checkbox"]:checked');
+      const progress = (checked.length / checkboxes.length) * 100;
+      document.getElementById('progress-fill').style.width = progress + '%';
+      document.getElementById('progress-text').textContent = `You've completed ${checked.length} out of ${checkboxes.length} self-care activities today!`;
+    }
+
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      cb.addEventListener('change', updateProgress);
+    });
+
+    // Load saved progress
+    const savedChecks = JSON.parse(localStorage.getItem('selfcare') || '[]');
+    savedChecks.forEach(id => {
+      const cb = document.getElementById(id);
+      if (cb) cb.checked = true;
+    });
+    updateProgress();
+
+    // Save progress on change
+    document.addEventListener('change', function(e) {
+      if (e.target.type === 'checkbox') {
+        const checked = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.id);
+        localStorage.setItem('selfcare', JSON.stringify(checked));
+      }
+    });
+
+    // Apply theme
+    const personality = localStorage.getItem('personality');
+    if (personality) {
+      document.body.classList.add('theme-' + personality.toLowerCase());
+    }
+  </script>
+</body>
+</html>

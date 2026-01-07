@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindCare | Mood Meter</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: url('image2.jpeg') no-repeat center center fixed;
+  background-size: cover;
+  color: var(--text);
+  min-height: 100vh;
+}
+    .mood-container {
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+    .mood-header {
+      margin-bottom: 2rem;
+    }
+    .mood-header i {
+      font-size: 4rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    .mood-scale {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .mood-option {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      border: 3px solid var(--accent);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--text);
+      position: relative;
+    }
+    .mood-option::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: -1;
+    }
+    .mood-option:hover::before {
+      opacity: 1;
+    }
+    .mood-option:hover {
+      transform: scale(1.1);
+    }
+    .mood-option.selected {
+      background: var(--primary);
+      color: var(--white);
+      box-shadow: 0 0 20px rgba(178, 223, 219, 0.5);
+    }
+    .mood-option.selected::before {
+      opacity: 0;
+    }
+    .mood-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      opacity: 0.7;
+      padding: 0 10px;
+    }
+    .chart-container {
+      margin-top: 3rem;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .chart-title {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      color: var(--text);
+    }
+    .bar-chart {
+      display: flex;
+      align-items: end;
+      justify-content: space-around;
+      height: 200px;
+      margin-bottom: 1rem;
+    }
+    .bar {
+      width: 40px;
+      background: linear-gradient(180deg, var(--primary), var(--accent));
+      border-radius: 5px 5px 0 0;
+      position: relative;
+      transition: height 0.5s;
+      min-height: 10px;
+    }
+    .bar::after {
+      content: attr(data-mood);
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: var(--text);
+    }
+    .x-axis {
+      display: flex;
+      justify-content: space-around;
+      padding-top: 1rem;
+      border-top: 1px solid #E2E8F0;
+    }
+    .x-label {
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+    .no-data {
+      text-align: center;
+      padding: 2rem;
+      color: #666;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <h2>MindCare</h2>
+    <a href="dashboard.html">Dashboard</a>
+  </nav>
+  <div class="container">
+    <div class="mood-container">
+      <div class="mood-header">
+        <i class="fas fa-heart"></i>
+        <h1>How are you feeling today?</h1>
+        <p>Select a number from 1 (very low) to 10 (excellent)</p>
+      </div>
+
+      <div class="mood-scale">
+        <div class="mood-option" data-mood="1">
+          <i class="fas fa-sad-cry"></i>
+          <span>1</span>
+        </div>
+        <div class="mood-option" data-mood="2">2</div>
+        <div class="mood-option" data-mood="3">3</div>
+        <div class="mood-option" data-mood="4">
+          <i class="fas fa-frown"></i>
+          <span>4</span>
+        </div>
+        <div class="mood-option" data-mood="5">5</div>
+        <div class="mood-option" data-mood="6">6</div>
+        <div class="mood-option" data-mood="7">
+          <i class="fas fa-smile"></i>
+          <span>7</span>
+        </div>
+        <div class="mood-option" data-mood="8">8</div>
+        <div class="mood-option" data-mood="9">9</div>
+        <div class="mood-option" data-mood="10">
+          <i class="fas fa-laugh-beam"></i>
+          <span>10</span>
+        </div>
+      </div>
+
+      <div class="mood-labels">
+        <span><i class="fas fa-cloud-rain"></i> Very Low</span>
+        <span><i class="fas fa-sun"></i> Excellent</span>
+      </div>
+
+      <button id="save-mood">
+        <i class="fas fa-save"></i> Save Mood
+      </button>
+
+      <div class="chart-container">
+        <div class="chart-title">
+          <i class="fas fa-chart-bar"></i> Your Mood Trends
+        </div>
+        <div id="chart-area">
+          <div class="no-data">
+            <i class="fas fa-chart-line" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+            <p>No mood data yet. Start tracking to see your trends!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    let selectedMood = null;
+
+    document.querySelectorAll('.mood-option').forEach(option => {
+      option.addEventListener('click', function() {
+        document.querySelectorAll('.mood-option').forEach(opt => opt.classList.remove('selected'));
+        this.classList.add('selected');
+        selectedMood = this.dataset.mood;
+      });
+    });
+
+    document.getElementById('save-mood').addEventListener('click', function() {
+      if (selectedMood) {
+        const moods = JSON.parse(localStorage.getItem('moodMeter') || '[]');
+        moods.push({ date: new Date().toISOString().split('T')[0], mood: selectedMood });
+        localStorage.setItem('moodMeter', JSON.stringify(moods));
+        alert('Mood saved! Keep tracking for better insights.');
+        loadChart();
+        selectedMood = null;
+        document.querySelectorAll('.mood-option').forEach(opt => opt.classList.remove('selected'));
+      } else {
+        alert('Please select a mood first.');
+      }
+    });
+
+    function loadChart() {
+      const moods = JSON.parse(localStorage.getItem('moodMeter') || '[]');
+      const chartArea = document.getElementById('chart-area');
+      if (moods.length === 0) return;
+
+      const recentMoods = moods.slice(-7);
+      chartArea.innerHTML = `
+        <div class="bar-chart" id="bar-chart"></div>
+        <div class="x-axis" id="x-axis"></div>
+      `;
+
+      const barChart = document.getElementById('bar-chart');
+      const xAxis = document.getElementById('x-axis');
+
+      recentMoods.forEach((item, index) => {
+        const bar = document.createElement('div');
+        bar.className = 'bar';
+        bar.style.height = `${(item.mood / 10) * 180}px`;
+        bar.setAttribute('data-mood', item.mood);
+        barChart.appendChild(bar);
+
+        const label = document.createElement('div');
+        label.className = 'x-label';
+        label.textContent = new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        xAxis.appendChild(label);
+      });
+    }
+
+    loadChart();
+
+    // Apply theme
+    const personality = localStorage.getItem('personality');
+    if (personality) {
+      document.body.classList.add('theme-' + personality.toLowerCase());
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+   <title>MindCare | Dashboard</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- 🌿 DASHBOARD-ONLY CSS -->
+  <style>
+    /* DASHBOARD BACKGROUND */
+    body {
+      background: url('image2.jpeg') no-repeat center center fixed;
+      background-size: cover;
+      overflow-x: hidden;
+    }
+
+    /* DASHBOARD CONTENT */
+    .dashboard {
+      max-width: 1100px;
+      margin: auto;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .dashboard h1 {
+      font-size: 2.4rem;
+      margin-bottom: 10px;
+    }
+
+    .dashboard p {
+      font-size: 1.05rem;
+      opacity: 0.75;
+    }
+
+    /* CARD GRID */
+    .dashboard-grid {
+      margin-top: 50px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    /* FEATURE CARDS */
+    .dash-card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px 20px;
+      border-radius: 28px;
+      text-decoration: none;
+      color: #2D3748;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      border: 1px solid #E2E8F0;
+    }
+
+    .dash-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 60px rgba(0,0,0,0.18);
+    }
+
+     .dash-card i {
+       font-size: 2rem;
+       display: block;
+       margin-bottom: 10px;
+       color: var(--primary);
+     }
+
+    .dash-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+
+    .dash-card small {
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+  <h2>MindCare</h2>
+  <a href="profile.html">Profile</a>
+</nav>
+
+<section class="dashboard">
+  <h1>Hello 🌿</h1>
+  <p>How are you feeling today?</p>
+
+  <div class="dashboard-grid">
+     <a href="checkin.html" class="dash-card">
+       <i class="fas fa-calendar-check"></i>
+       <h3>Daily Check-in</h3>
+       <small>Track your emotions</small>
+     </a>
+
+     <a href="journal.html" class="dash-card">
+       <i class="fas fa-book"></i>
+       <h3>Journal</h3>
+       <small>Write your thoughts</small>
+     </a>
+
+     <a href="selfcare.html" class="dash-card">
+       <i class="fas fa-spa"></i>
+       <h3>Self-Care</h3>
+       <small>Daily wellness habits</small>
+     </a>
+
+     <a href="chatbot.html" class="dash-card">
+       <i class="fas fa-comments"></i>
+       <h3>Calm Companion</h3>
+       <small>Talk & feel heard</small>
+     </a>
+
+     <a href="relax.html" class="dash-card">
+       <i class="fas fa-leaf"></i>
+       <h3>Relax</h3>
+       <small>Breathing & calm</small>
+     </a>
+
+     <a href="personality.html" class="dash-card">
+       <i class="fas fa-brain"></i>
+       <h3>Personality Test</h3>
+       <small>Discover your type</small>
+     </a>
+
+     <a href="fungames.html" class="dash-card">
+       <i class="fas fa-gamepad"></i>
+       <h3>Fun Games</h3>
+       <small>Relax with games</small>
+     </a>
+
+     <a href="moodmeter.html" class="dash-card">
+       <i class="fas fa-smile"></i>
+       <h3>Mood Meter</h3>
+       <small>Rate your mood</small>
+     </a>
+   </div>
+ </section>
+ <script>
+   const personality = localStorage.getItem('personality');
+   if (personality) {
+     document.body.classList.add('theme-' + personality.toLowerCase());
+   }
+ </script>
+ </body>
+ </html>

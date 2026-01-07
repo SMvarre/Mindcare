@@ -1,0 +1,185 @@
+/* ===============================
+   MINDCARE – STABLE MULTI-PAGE UI
+   =============================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+   --primary: #B2DFDB;
+   --secondary: #F5F5F5;
+   --accent: #4A5568;
+   --text: #2D3748;
+   --white: #ffffff;
+}
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BODY */
+body {
+   font-family: 'Poppins', sans-serif;
+   min-height: 100vh;
+   background: var(--secondary);
+   color: var(--text);
+   position: relative;
+   overflow-x: hidden;
+}
+
+/* SAFE BACKGROUND OVERLAY */
+body::before {
+   content: "";
+   position: fixed;
+   inset: 0;
+   background: rgba(178, 223, 219, 0.1);
+   z-index: -1;
+   pointer-events: none;
+}
+
+/* NAVBAR */
+.navbar {
+   background: var(--white);
+   padding: 1rem 2rem;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* CONTAINER */
+.container {
+  padding: 3rem 2rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* HEADINGS */
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+h2, h3 {
+  font-weight: 500;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  opacity: 0.75;
+  margin-bottom: 1.5rem;
+}
+
+/* DASHBOARD LINKS / TILES */
+a {
+   color: var(--accent);
+   font-weight: 500;
+   text-decoration: none;
+}
+
+/* CHATBOT PAGE ONLY */
+.chatbot-page {
+  max-width: 700px;
+  margin: auto;
+}
+
+/* CHAT BOX */
+.chat-box {
+   background: var(--white);
+   border-radius: 26px;
+   padding: 1.2rem;
+   height: 320px;
+   overflow-y: auto;
+   box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+   display: flex;
+   flex-direction: column;
+}
+
+/* CHAT MESSAGES */
+.message {
+  max-width: 75%;
+  padding: 12px 16px;
+  margin: 8px 0;
+  border-radius: 18px;
+  font-size: 0.95rem;
+}
+
+.message.bot {
+  background: #e8f5f2;
+  align-self: flex-start;
+}
+
+.message.user {
+  background: linear-gradient(135deg, #cdb4db, #bde0fe);
+  align-self: flex-end;
+}
+
+/* CHAT INPUT — SCOPED FIX */
+.chat-input {
+   display: flex;
+   gap: 12px;
+   margin-top: 1rem;
+}
+
+.chat-input input {
+   flex: 1;
+   padding: 14px 18px;
+   border-radius: 22px;
+   border: 1px solid #e2e8f0;
+   font-size: 1rem;
+   background: var(--white);
+   outline: none;
+   z-index: 2;
+   position: relative;
+}
+
+/* BUTTONS */
+button {
+   padding: 14px 24px;
+   border-radius: 22px;
+   border: none;
+   background: var(--primary);
+   color: var(--text);
+   font-size: 1rem;
+   cursor: pointer;
+   transition: background 0.3s;
+}
+
+/* SMALL TEXT */
+.muted {
+  font-size: 0.8rem;
+  opacity: 0.65;
+}
+
+/* PERSONALITY THEMES */
+.theme-calm {
+   --primary: #A8DADC;
+   --secondary: #F0F8F8;
+   --accent: #4A5568;
+   --text: #2D3748;
+}
+
+.theme-energetic {
+   --primary: #CDB4DB;
+   --secondary: #FCF3FD;
+   --accent: #6B46C1;
+   --text: #2D3748;
+}
+
+.theme-reflective {
+   --primary: #FFD6A5;
+   --secondary: #FFF8F0;
+   --accent: #D69E2E;
+   --text: #2D3748;
+}
+
+.theme-balanced {
+   --primary: #B2DFDB;
+   --secondary: #F5F5F5;
+   --accent: #4A5568;
+   --text: #2D3748;
+}
+

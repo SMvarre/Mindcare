@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MindCare | Welcome</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500;600&display=swap');
+
+body {
+   margin: 0;
+   font-family: 'Poppins', sans-serif;
+   min-height: 100vh;
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+   background: url('main.jpeg') no-repeat center center fixed;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+   padding: 3rem;
+}
+
+/* MAIN CARD */
+.login-card {
+   background: rgba(107, 143, 142, 0.95);
+   width: 360px;
+   padding: 2.8rem 2.5rem;
+   border-radius: 28px;
+   box-shadow: 0 30px 70px rgba(0,0,0,0.15);
+   text-align: center;
+   position: relative;
+   margin-right: 10rem;
+}
+
+/* DOODLE ILLUSTRATION (EMOJI STYLE) */
+.doodle {
+  font-size: 3rem;
+  margin-bottom: 0.6rem;
+}
+
+
+
+h1 {
+  margin: 0;
+  font-weight: 600;
+  color: #355f5b;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  opacity: 0.75;
+  margin: 0.6rem 0 1.8rem;
+}
+
+/* INPUTS */
+input {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  border-radius: 16px;
+  border: none;
+  background: #f1f7f6;
+  font-size: 0.95rem;
+  outline: none;
+  transition: box-shadow 0.3s ease;
+}
+
+input:focus {
+  box-shadow: 0 0 0 3px rgba(154, 208, 194, 0.6);
+}
+
+/* CTA BUTTON */
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  border-radius: 20px;
+  border: none;
+  background: linear-gradient(135deg, #6fcf97, #56cfe1);
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  animation: pulse 2.2s infinite;
+}
+
+@keyframes pulse {
+   0% { box-shadow: 0 0 0 0 rgba(111, 207, 151, 0.6); }
+   70% { box-shadow: 0 0 0 14px rgba(111, 207, 151, 0); }
+   100% { box-shadow: 0 0 0 0 rgba(111, 207, 151, 0); }
+}
+
+/* QUOTE IN CARD */
+.quote {
+   font-family: 'Playfair Display', serif;
+   font-size: 1.5rem;
+   line-height: 1.4;
+   color: #2e3a3a;
+   margin-bottom: 0.5rem;
+}
+
+.author {
+   margin-bottom: 1.5rem;
+   font-size: 0.9rem;
+   opacity: 0.7;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+   body {
+     justify-content: center;
+   }
+}
+
+/* LINKS */
+.links {
+  margin-top: 1.2rem;
+  font-size: 0.85rem;
+}
+
+.links a {
+  text-decoration: none;
+  color: #4a7c78;
+  font-weight: 500;
+}
+
+.links p {
+  margin: 6px 0;
+}
+</style>
+</head>
+
+<body>
+
+   <!-- RIGHT: LOGIN CARD WITH QUOTE -->
+   <div class="login-card">
+
+     <div class="quote">
+       "The present moment is the only moment available to us, and it is the door to all moments."
+     </div>
+
+     <div class="author">
+       — Thich Nhat Hanh
+     </div>
+
+     <h1>MindCare</h1>
+     <p class="subtitle">A safe space to slow down and breathe</p>
+
+     <input type="email" placeholder="Email address" />
+     <input type="password" placeholder="Password" />
+
+     <button onclick="location.href='personality.html'">
+       Start Personality Test
+     </button>
+
+     <div class="links">
+       <p><a href="#">Forgot password?</a></p>
+       <p>New here? <a href="#">Create account</a></p>
+     </div>
+
+   </div>
+
+</body>
+</html>

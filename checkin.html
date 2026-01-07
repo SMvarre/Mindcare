@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Daily Check-in</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: url('image1.jpeg') no-repeat center center fixed;
+      background-size: cover;
+    }
+  </style>
+</head>
+<body>
+
+<section class="container">
+
+  <!-- Heading -->
+  <h3 style="text-align:center;">How are you feeling right now?</h3>
+  <p style="text-align:center; font-size:14px;">
+    There’s no right or wrong feeling
+  </p>
+
+  <!-- Mood Selection -->
+  <div class="mood-row" style="display:flex; justify-content:center; gap:12px; margin-top:12px;">
+    <button title="Very Happy">😊</button>
+    <button title="Good">🙂</button>
+    <button title="Okay">😐</button>
+    <button title="Low">😔</button>
+    <button title="Very Sad">😢</button>
+  </div>
+
+  <!-- Energy Level -->
+  <div style="margin-top:18px;">
+    <label><strong>Energy level</strong></label><br>
+    <input type="range" min="0" max="10" style="width:100%;">
+    <div style="display:flex; justify-content:space-between; font-size:12px;">
+      <span>Low</span>
+      <span>High</span>
+    </div>
+  </div>
+
+  <!-- Stress Level (Improved Selection) -->
+  <div style="margin-top:18px;">
+    <label><strong>Stress level</strong></label>
+
+    <div style="display:flex; justify-content:space-between; margin-top:10px;">
+      <button style="flex:1; margin:2px;">😌<br><small>Calm</small></button>
+      <button style="flex:1; margin:2px;">🙂<br><small>Light</small></button>
+      <button style="flex:1; margin:2px;">😐<br><small>Moderate</small></button>
+      <button style="flex:1; margin:2px;">😣<br><small>High</small></button>
+    </div>
+  </div>
+
+  <!-- NEW OPTION: Focus Level -->
+  <div style="margin-top:18px;">
+    <label><strong>Focus right now</strong></label><br>
+    <input type="range" min="0" max="10" style="width:100%;">
+    <div style="display:flex; justify-content:space-between; font-size:12px;">
+      <span>Distracted</span>
+      <span>Focused</span>
+    </div>
+  </div>
+
+  <!-- Journal -->
+  <textarea 
+    placeholder="Want to share something about today?"
+    style="width:100%; margin-top:18px;">
+  </textarea>
+
+  <!-- CTA -->
+  <button class="primary" style="width:100%; margin-top:18px;">
+    Save Today’s Mood
+  </button>
+
+</section>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calm Companion</title>
+   <link rel="stylesheet" href="style.css">
+   <style>
+     body {
+       background: url('image1.jpeg') no-repeat center center fixed;
+       background-size: cover;
+     }
+   </style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Calm Companion 🤍</h1>
+  <p>I’m here to help you slow things down.</p>
+
+  <div class="chat-box" id="chatBox">
+    <div class="message bot">
+      Hi. How are you feeling right now?
+    </div>
+  </div>
+
+  <div class="chat-input">
+    <input
+      type="text"
+      id="userInput"
+      placeholder="Type here..."
+      autocomplete="off"
+      onkeydown="if(event.key==='Enter') sendMessage()"
+    >
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+   <button onclick="location.href='relax.html'">
+     Continue to Relaxations
+   </button>
+</div>
+
+<!-- 🔥 FIREBASE SCRIPTS -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+  /* ===============================
+     FIREBASE SETUP
+     =============================== */
+
+  const firebaseConfig = {
+    apiKey: "PASTE_YOUR_API_KEY",
+    authDomain: "PASTE_YOUR_AUTH_DOMAIN",
+    projectId: "PASTE_YOUR_PROJECT_ID",
+    storageBucket: "PASTE_YOUR_STORAGE_BUCKET",
+    messagingSenderId: "PASTE_YOUR_MESSAGING_ID",
+    appId: "PASTE_YOUR_APP_ID"
+  };
+
+  // Prevent re-initialization
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+
+  const db = firebase.firestore();
+
+  /* ===============================
+     CHATBOT LOGIC
+     =============================== */
+
+  const chatBox = document.getElementById("chatBox");
+  const input = document.getElementById("userInput");
+
+  function addMessage(text, sender) {
+    const msg = document.createElement("div");
+    msg.classList.add("message", sender);
+    msg.innerText = text;
+    chatBox.appendChild(msg);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+  function sendMessage() {
+    const userText = input.value.trim();
+    if (userText === "") return;
+
+    // Show message in UI
+    addMessage(userText, "user");
+    input.value = "";
+
+    // 🔐 SAVE TO FIREBASE
+    db.collection("chatMessages").add({
+      message: userText,
+      sender: "user",
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    setTimeout(() => {
+      botReply(userText);
+    }, 600);
+  }
+
+  function botReply(text) {
+    text = text.toLowerCase();
+
+    // 😔 NEGATIVE FEELINGS
+    if (
+      text.includes("sad") ||
+      text.includes("bad") ||
+      text.includes("not good") ||
+      text.includes("tired") ||
+      text.includes("stressed") ||
+      text.includes("angry")
+    ) {
+      addMessage("Thanks for telling me 🤍", "bot");
+      addMessage("Would you like to relax or do a quick check-in?", "bot");
+
+      // Optional: save bot reply
+      db.collection("chatMessages").add({
+        message: "Bot offered relax or check-in",
+        sender: "bot",
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      return;
+    }
+
+    // 🙂 POSITIVE FEELINGS
+    if (
+      text.includes("good") ||
+      text.includes("happy") ||
+      text.includes("fine") ||
+      text.includes("okay") ||
+      text.includes("great")
+    ) {
+      addMessage("That’s nice to hear ✨", "bot");
+      addMessage("Want to reflect on it or just chat?", "bot");
+      return;
+    }
+
+    // 🌿 RELAX
+    if (text.includes("relax")) {
+      addMessage("Let’s slow things down 🌿", "bot");
+      setTimeout(() => {
+        window.location.href = "relax.html";
+      }, 1000);
+      return;
+    }
+
+    // 🧠 CHECK-IN
+    if (text.includes("check")) {
+      addMessage("Okay, let’s do a gentle check-in 🧠", "bot");
+      setTimeout(() => {
+        window.location.href = "checkin.html";
+      }, 1000);
+      return;
+    }
+
+    // DEFAULT
+    addMessage("I’m here with you. Say whatever’s on your mind.", "bot");
+   }
+ </script>
+ <script>
+   const personality = localStorage.getItem('personality');
+   if (personality) {
+     document.body.classList.add('theme-' + personality.toLowerCase());
+   }
+ </script>
+ </body>
+ </html>
+
